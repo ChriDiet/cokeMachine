@@ -38,10 +38,36 @@ function updateView() {
                     <button onclick="returnCoins()">Angre</button>
                     <button onclick="takeCoins()">Ta myntene</button>
                     <button onclick="buyCoke()">Kjøpe cola</button>
-                    <button>Ta cola</button>
+                    <button onclick="takeCola()">Ta cola</button>
+                    
                 </div>
             </div>
         </div>
+    `;
+}
+
+// ${createButtonHtml('Angre', "returnCoins()")}
+{/*                 <button onclick="insertCoin(1)">Putte inn 1kr</button>
+                    <button onclick="insertCoin(5)">Putte inn 5kr</button>
+                    <button onclick="insertCoin(10)">Putte inn 10kr</button>
+                    <button onclick="insertCoin(20)">Putte inn 20kr</button>
+                    <button onclick="returnCoins()">Angre</button>
+                    
+                    <button onclick="takeCoins()">Ta myntene</button>
+                    <button onclick="buyCoke()">Kjøpe cola</button>
+                    <button>Ta cola</button> */}
+
+function createButtonsHtml(amount) {
+    let buttonsHtml = '';
+    for (let i = 0; i < amount; i++) {
+        buttonsHtml += createButtonHtml(insertCoin(i));
+    }
+    return buttonsHtml;
+}
+
+function createButtonHtml(label, onclick) {
+    return /*html*/ `
+        <button onclick="${onclick}">${label}</button>
     `;
 }
 
@@ -57,5 +83,5 @@ function getCoinsHtml(coinCounts) {
 }
 
 function repeatImgDivHtml(cssClass, image, count) {
-    return /*HTML*/`<div class="${cssClass}"><img src="img/${image}.png"/></div>`.repeat(count);
+    return /*HTML*/`<div class="${cssClass}"><img src="../img/${image}.png"/></div>`.repeat(count);
 }
