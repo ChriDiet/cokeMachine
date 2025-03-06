@@ -5,7 +5,6 @@ function buyCoke() {
         returnCoins();
     }
     if(totalCoinsInserted() < price) return;
-    if(totalCoinsInserted() === price) resetCoinsInserted();
     if(totalCoinsInserted() > price) {
 
         let change = calcChange(price);
@@ -66,7 +65,7 @@ function returnChange(price, change) {
 
     for(let i = tempCoinsInMachine.length - 1; i >= 0; i--) {
         let coinValue = coinValueFromIndex(i);
-        let count = Math.floor(Number(change) / coinValue);
+        let count = Math.floor(change / coinValue);
 
         count = Math.min(count, tempCoinsInMachine[i]);
         if(count > 0) {
@@ -102,6 +101,12 @@ function takeCoins() {
 function takeCola() {
     isCokeInDelivery = false;
     updateView();
+}
+
+function correctAmount() {
+    coinsInMachine.forEach((coin, index) => {
+        coinsInMachine[index] += coinsInserted[index];
+    })
 }
 
 function resetCoinsInserted() {
