@@ -103,12 +103,6 @@ function takeCola() {
     updateView();
 }
 
-function correctAmount() {
-    coinsInMachine.forEach((coin, index) => {
-        coinsInMachine[index] += coinsInserted[index];
-    })
-}
-
 function resetCoinsInserted() {
     coinsInserted = [0, 0, 0, 0];
 }
