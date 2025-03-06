@@ -1,3 +1,8 @@
+body{
+    color: black;
+    background-color: darkred;
+}
+
 .coin > img {
     height: 5rem;
 }
@@ -18,23 +23,27 @@
 }
 
 .automat {
-    border: 5px solid gray;
+    border: 5px solid black;
+    color: black;
     padding-left: 1rem;
     margin-right: 1rem;
-    background-color: lightblue;
+    background-color: whitesmoke;
 }
 
 .innmat{
     display: flex;
+    
 }
 
 .flexHorizontal {
     display: flex;
+    color: white;
 }
 
 .flexVertical{
     display: flex;
     flex-direction: column;
+    color: white;
 }
 
 .cokes {
@@ -46,3 +55,8 @@
     width: 2rem;
     overflow: visible;
 }
+
+div{
+    color: black;
+}
+

@@ -16,6 +16,7 @@ function updateView() {
                     </div>
                 </div>            
                 <div>
+                    
                     Mynt- og cola-utkast: ${valueFromCoinCounts(coinsReturned)}kr
                     ${getCoinsHtml(coinsReturned)}
                     ${repeatImgDivHtml('coke', 'coke', isCokeInDelivery ? 1 : 0)}
@@ -31,14 +32,20 @@ function updateView() {
                     <path transform="rotate(-1.79 -12147.887 7779.517)" d="M344.352 455.71a31.228 33.718 0 0 1-39.995.25" style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;stroke-opacity:1"/>
                 </svg>
                 <div class="flexHorizontal">
+                     
                     <button onclick="insertCoin(1)">Putte inn 1kr</button>
                     <button onclick="insertCoin(5)">Putte inn 5kr</button>
                     <button onclick="insertCoin(10)">Putte inn 10kr</button>
                     <button onclick="insertCoin(20)">Putte inn 20kr</button>
                     <button onclick="returnCoins()">Angre</button>
                     <button onclick="takeCoins()">Ta myntene</button>
+                    <button onclick="takeCoke();">Ta cola</button>
                     <button onclick="buyCoke()">Kjøpe cola</button>
-                    <button>Ta cola</button>
+                </div>
+                <div>Lommebok: ${formatCoinArray(customerWallet)}</div>
+                <div>
+                Antall Cola kunde: ${customerColas}
+                <button onclick="drinkCoke()">Drikk cola </button>
                 </div>
             </div>
         </div>
