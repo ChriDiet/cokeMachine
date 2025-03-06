@@ -1,7 +1,10 @@
 function buyCoke() {
-    const price = 25
+    const price = 25;
+    if(!cokesInStore) {
+        errorMessage = 'Maskinen er tom for cola';
+        returnCoins();
+    }
     if(totalCoinsInserted() < price) return;
-    if(totalCoinsInserted() === price) resetCoinsInserted();
     if(totalCoinsInserted() > price) {
 
         let change = calcChange(price);
@@ -39,10 +42,6 @@ function insertCoin(value) {
 function returnCoins() {
     if(isCoinsInsertedEmpty()) return;
 
-    coinsInserted.forEach((_, index) => {
-        coinsInMachine[index] -= coinsInserted[index];
-    });
-
     coinsReturned = [...coinsInserted];
     resetCoinsInserted();
     updateView();
@@ -64,10 +63,9 @@ function returnChange(price, change) {
     const tempCoinsInMachine = [...coinsInMachine];
     const toReturn = [...coinsReturned];
 
-
     for(let i = tempCoinsInMachine.length - 1; i >= 0; i--) {
         let coinValue = coinValueFromIndex(i);
-        let count = Math.floor(Number(change) / coinValue);
+        let count = Math.floor(change / coinValue);
 
         count = Math.min(count, tempCoinsInMachine[i]);
         if(count > 0) {
@@ -77,13 +75,14 @@ function returnChange(price, change) {
         if(change <= 0) break;
     }
 
-    toReturn.forEach((coin, index) => {
-        if(coin > 0) {
-            coinsReturned = [...toReturn];
-            coinsInMachine[index] -= coin;
-        }
-    })
-
+    if(change <= 0) {
+        console.log("toReturnArr ", toReturn);
+        toReturn.forEach((coin, index) => {
+                tempCoinsInMachine[index] -= coin;
+        });
+        coinsReturned = [...toReturn];
+        coinsInMachine = [...tempCoinsInMachine];
+    }
     return change;
 }
 
@@ -95,6 +94,7 @@ function calcChange(price) {
 
 function takeCoins() {
     coinsReturned = [0, 0, 0, 0];
+    errorMessage = '';
     updateView();
 }
 
