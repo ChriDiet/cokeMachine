@@ -3,9 +3,33 @@ function buyCoke() {
     if(totalCoinsInserted() < price) return;
     if(totalCoinsInserted() === price) resetCoinsInserted();
     if(totalCoinsInserted() > price) {
+        debugger;
+        let change = calcChange(price);
+        console.log(change);
+        let toReturn = [0, 0, 0, 0];
+        for(let i = coinsInMachine.length - 1; i >= 0; i--) {
+            let count = Math.floor(Number(change) / Number(coinValueFromIndex(i)));
 
+            if(coinsInMachine[i] > 0) {
+                if(count > 0) {
+                    toReturn[i] += count;
+                }
+                change %= coinValueFromIndex(i);
+                coinsReturned[i] = toReturn[i];
+                coinsInMachine[i] -= toReturn[i];
+            }
+        }
+            console.log(toReturn);
     }
 
+    for (let i = 0; i < coinsInserted.length; i++) {
+        // if(coinsInserted[i] )
+            coinsInMachine[i] += coinsInserted[i];
+    }
+    console.log("in machine after buy: ",coinsInMachine);
+    // for(let coins in coinsInserted) {
+    //     coinsInMachine[coins] += coinsInserted[coins];
+    // }
     cokesInStore--;
     isCokeInDelivery = true;
     updateView();
@@ -16,7 +40,7 @@ function insertCoin(value) {
         // if(coinValueFromIndex(i) === value) incrementDecrementAtIndex(coinsInserted, coinsInMachine, i);
         if(coinValueFromIndex(i) === value) {
             coinsInserted[i]++;
-            coinsInMachine[i]++;
+            // coinsInMachine[i]++;
         }
     }
 
@@ -55,6 +79,8 @@ function totalCoinsInserted() {
 }
 
 function returnChange(toReturn) {
+
+    // console.log(change);
 
 }
 
