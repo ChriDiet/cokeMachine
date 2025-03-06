@@ -3,33 +3,25 @@ function buyCoke() {
     if(totalCoinsInserted() < price) return;
     if(totalCoinsInserted() === price) resetCoinsInserted();
     if(totalCoinsInserted() > price) {
-        debugger;
+
         let change = calcChange(price);
-        console.log(change);
-        let toReturn = [0, 0, 0, 0];
-        for(let i = coinsInMachine.length - 1; i >= 0; i--) {
-            let count = Math.floor(Number(change) / Number(coinValueFromIndex(i)));
-
-            if(coinsInMachine[i] > 0) {
-                if(count > 0) {
-                    toReturn[i] += count;
-                }
-                change %= coinValueFromIndex(i);
-                coinsReturned[i] = toReturn[i];
-                coinsInMachine[i] -= toReturn[i];
-            }
+        change = returnChange(price, change);
+        if(change > 0) {
+            errorMessage = 'Not able to return correct amount, money returned';
+            coinsReturned = [...coinsInserted];
+            resetCoinsInserted();
+            updateView();
+            return;
         }
-            console.log(toReturn);
+
     }
 
-    for (let i = 0; i < coinsInserted.length; i++) {
-        // if(coinsInserted[i] )
-            coinsInMachine[i] += coinsInserted[i];
-    }
-    console.log("in machine after buy: ",coinsInMachine);
-    // for(let coins in coinsInserted) {
-    //     coinsInMachine[coins] += coinsInserted[coins];
-    // }
+    coinsInserted.forEach((_, index) => {
+        coinsInMachine[index] += coinsInserted[index]
+    });
+
+
+    resetCoinsInserted();
     cokesInStore--;
     isCokeInDelivery = true;
     updateView();
@@ -37,26 +29,22 @@ function buyCoke() {
 
 function insertCoin(value) {
     for (let i = 0; i < coinsInserted.length; i++) {
-        // if(coinValueFromIndex(i) === value) incrementDecrementAtIndex(coinsInserted, coinsInMachine, i);
         if(coinValueFromIndex(i) === value) {
             coinsInserted[i]++;
-            // coinsInMachine[i]++;
         }
     }
-
     updateView();
 }
 
 function returnCoins() {
     if(isCoinsInsertedEmpty()) return;
 
-    coinsInserted.forEach((coin, index) => {
+    coinsInserted.forEach((_, index) => {
         coinsInMachine[index] -= coinsInserted[index];
     });
 
     coinsReturned = [...coinsInserted];
     resetCoinsInserted();
-    // coinsInserted = [0, 0, 0, 0];
     updateView();
 }
 
@@ -65,23 +53,38 @@ function isCoinsInsertedEmpty() {
 }
 
 function totalCoinsInserted() {
-
-    // let initVal = 0;
-    // return coinsInserted.reduce((acc, cur, i) => {
-    //      return acc + (cur * coinValueFromIndex(i));
-    // }, initVal);
-
     let total = 0;
-    coinsInserted.forEach((coin, index) => {
+    coinsInserted.forEach((_, index) => {
         total += coinsInserted[index] * coinValueFromIndex(index);
     });
     return total;
 }
 
-function returnChange(toReturn) {
+function returnChange(price, change) {
+    const tempCoinsInMachine = [...coinsInMachine];
+    const toReturn = [...coinsReturned];
 
-    // console.log(change);
 
+    for(let i = tempCoinsInMachine.length - 1; i >= 0; i--) {
+        let coinValue = coinValueFromIndex(i);
+        let count = Math.floor(Number(change) / coinValue);
+
+        count = Math.min(count, tempCoinsInMachine[i]);
+        if(count > 0) {
+            toReturn[i] += count;
+            change -= count * coinValue;
+        }
+        if(change <= 0) break;
+    }
+
+    toReturn.forEach((coin, index) => {
+        if(coin > 0) {
+            coinsReturned = [...toReturn];
+            coinsInMachine[index] -= coin;
+        }
+    })
+
+    return change;
 }
 
 function calcChange(price) {

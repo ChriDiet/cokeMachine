@@ -4,11 +4,12 @@
 //     10, // tikroninger
 //     5, // tjuekroninger
 // ];
+// let coinsInMachine = [20, 5, 0, 25];
 let coinsInMachine = [
     5, // enkroninger
-    5, // femkroninger
+    1, // femkroninger
     0, // tikroninger
-    0, // tjuekroninger
+    10, // tjuekroninger
 ];
 let coinsInserted = [
     0, // enkroninger
