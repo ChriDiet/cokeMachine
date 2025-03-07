@@ -44,7 +44,7 @@ function updateView() {
                 </div>
                 <div>Lommebok: ${formatCoinArray(customerWallet)}</div>
                 <div>
-                Antall Cola kunde: ${customerColas}
+                Antall Cola kunde: ${customerCokes}
                 <button onclick="drinkCoke()">Drikk cola </button>
                 </div>
             </div>
