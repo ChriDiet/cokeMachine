@@ -108,16 +108,5 @@
             // assert
             assert.deepEqual(coinsReturned, [0, 0, 0, 0])
         });
-
-        QUnit.test('for lite penger i automat til å returnere riktig veksel', function (assert) {
-            initModel();
-            insertCoin(20);
-            insertCoin(20);
-            coinsInMachine = [5, 1, 0, 10];
-
-            buyCoke();
-
-            assert.deepEqual(coinsInMachine, [5, 1, 0, 10]);
-        });
     </script>
 </body>

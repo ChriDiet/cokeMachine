@@ -1,81 +1,96 @@
 function buyCoke() {
     const price = 25;
-    if(!cokesInStore) {
-        errorMessage = 'Maskinen er tom for cola';
-        returnCoins();
-    }
-    if(totalCoinsInserted() < price) return;
-    if(totalCoinsInserted() > price) {
 
+    if (valueFromCoinCounts(coinsInserted) < price) {
+        let missingValue = calcChange(price);
+        errorMessage = `Ikke nok penger. Du mangler ${Math.abs(missingValue)}kr`; 
+        dagIsFeeling='sad';
+        updateView()
+        return;
+    }
+
+    if (valueFromCoinCounts(coinsInserted) > price) {
         let change = calcChange(price);
-        change = returnChange(price, change);
+        change = returnChange(change);
         if(change > 0) {
             errorMessage = 'Not able to return correct amount, money returned';
             returnCoins();
             return;
         }
-
     }
+    
+    updateSaleVariables()
 
-    coinsInserted.forEach((_, index) => {
-        coinsInMachine[index] += coinsInserted[index]
-    });
-
-
-    resetCoinsInserted();
-    cokesInStore--;
-    isCokeInDelivery = true;
-    updateView();
-}
-
-function insertCoin(value) {
     for (let i = 0; i < coinsInserted.length; i++) {
-        if(coinValueFromIndex(i) === value) {
-            coinsInserted[i]++;
-        }
+        coinsInMachine[i] += coinsInserted[i];
     }
+    resetCoinsInserted();
     updateView();
 }
 
 function returnCoins() {
-    if(isCoinsInsertedEmpty()) return;
+    if (valueFromCoinCounts(coinsInserted) === 0) return;
 
     coinsReturned = [...coinsInserted];
     resetCoinsInserted();
     updateView();
 }
 
-function isCoinsInsertedEmpty() {
-    return coinsInserted.every((coin) => coin === 0);
+function updateSaleVariables() {
+    cokesInStore--
+    isCokeInDelivery = true;
+    errorMessage = '';
+    dagIsFeeling='happy';
+    updateView()
 }
 
-function totalCoinsInserted() {
-    let total = 0;
-    coinsInserted.forEach((_, index) => {
-        total += coinsInserted[index] * coinValueFromIndex(index);
-    });
-    return total;
+function insertCoin(value) {
+    let machineReady = isMachineReady();
+    
+    if (machineReady)
+    for (let i = 0; i < coinsInserted.length; i++) {
+        if(coinValueFromIndex(i) === value) {
+            coinsInserted[i]++;
+        }
+    }
+
+    updateView();
 }
 
-function returnChange(price, change) {
+function isMachineReady() {
+    if (isCokeInDelivery) {
+        errorMessage = 'Jeg tror du har glemt den andre colaen, ta den først.';
+        updateView()
+        return false; 
+    } else if (cokesInStore === 0) {
+        errorMessage = 'Beklager maskinen er tom for cola';
+        returnCoins();
+        updateView()
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function returnChange(change) {
     const tempCoinsInMachine = [...coinsInMachine];
     const toReturn = [...coinsReturned];
 
-    for(let i = tempCoinsInMachine.length - 1; i >= 0; i--) {
+    for (let i = tempCoinsInMachine.length - 1; i >= 0; i--) {
         let coinValue = coinValueFromIndex(i);
         let count = Math.floor(change / coinValue);
 
         count = Math.min(count, tempCoinsInMachine[i]);
-        if(count > 0) {
+        if (count > 0) {
             toReturn[i] += count;
             change -= count * coinValue;
         }
-        if(change <= 0) break;
+        if (change <= 0) break;
     }
 
-    if(change <= 0) {
+    if (change <= 0) {
         toReturn.forEach((coin, index) => {
-                tempCoinsInMachine[index] -= coin;
+            tempCoinsInMachine[index] -= coin;
         });
         coinsReturned = [...toReturn];
         coinsInMachine = [...tempCoinsInMachine];
@@ -85,7 +100,7 @@ function returnChange(price, change) {
 
 function calcChange(price) {
     let change = 0;
-    change = totalCoinsInserted() - price;
+    change = valueFromCoinCounts(coinsInserted) - price;
     return change;
 }
 
@@ -96,7 +111,10 @@ function takeCoins() {
 }
 
 function takeCola() {
+    if (isCokeInDelivery)
+    dagIsFeeling='ecstatic'
     isCokeInDelivery = false;
+    errorMessage = '';
     updateView();
 }
 
