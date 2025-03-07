@@ -87,7 +87,7 @@ function formatCoinArray(array) {
 function takeCoke() {
     if (isCokeInDelivery) {
         isCokeInDelivery = false;
-        customerColas++;
+        customerCokes++;
         updateView();
         console.log("Coke taken.");
     } else {
@@ -96,11 +96,11 @@ function takeCoke() {
 }
 
 function drinkCoke() {
-    if (customerColas > 0) {
-        customerColas--;
+    if (customerCokes > 0) {
+        customerCokes--;
         updateView();
-        console.log("Cola consumed. Remaining:", customerColas);
+        console.log("Coke consumed. Remaining:", customerCokes);
     } else {
-        console.log("No cola left to drink.");
+        console.log("No Coke left to drink.");
     }
 }
