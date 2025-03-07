@@ -11,9 +11,7 @@ function buyCoke() {
         change = returnChange(price, change);
         if(change > 0) {
             errorMessage = 'Not able to return correct amount, money returned';
-            coinsReturned = [...coinsInserted];
-            resetCoinsInserted();
-            updateView();
+            returnCoins();
             return;
         }
 
@@ -76,7 +74,6 @@ function returnChange(price, change) {
     }
 
     if(change <= 0) {
-        console.log("toReturnArr ", toReturn);
         toReturn.forEach((coin, index) => {
                 tempCoinsInMachine[index] -= coin;
         });

@@ -14,9 +14,7 @@ function buyCoke() {
         change = returnChange(change);
         if(change > 0) {
             errorMessage = 'Not able to return correct amount, money returned';
-            coinsReturned = [...coinsInserted];
-            resetCoinsInserted();
-            updateView();
+            returnCoins();
             return;
         }
     }
@@ -31,7 +29,7 @@ function buyCoke() {
 }
 
 function returnCoins() {
-    if (valueFromCoinCounts(coinsInserted) == 0) return;
+    if (valueFromCoinCounts(coinsInserted) === 0) return;
 
     coinsReturned = [...coinsInserted];
     resetCoinsInserted();
@@ -64,7 +62,7 @@ function isMachineReady() {
         errorMessage = 'Jeg tror du har glemt den andre colaen, ta den først.';
         updateView()
         return false; 
-    } else if (cokesInStore == 0) {
+    } else if (cokesInStore === 0) {
         errorMessage = 'Beklager maskinen er tom for cola';
         returnCoins();
         updateView()
