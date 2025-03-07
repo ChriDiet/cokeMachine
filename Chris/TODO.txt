@@ -1,9 +1,0 @@
-coins to be used:
-    1kr
-    5kr
-    10kr
-    20kr
-
-be able to use all coin types 
-
-use errorMessage variable to display message. e.g if customer can't afford cola.

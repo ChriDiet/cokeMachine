@@ -3,8 +3,8 @@ function buyCoke() {
 
     if (valueFromCoinCounts(coinsInserted) < price) {
         let missingValue = calcChange(price);
-        errorMessage = `Ikke nok penger. Du mangler ${Math.abs(missingValue)}kr`; 
-        dagIsFeeling='sad';
+        errorMessage = `Ikke nok penger. Du mangler ${Math.abs(missingValue)}kr`;
+        dagIsFeeling = 'sad';
         updateView()
         return;
     }
@@ -12,13 +12,13 @@ function buyCoke() {
     if (valueFromCoinCounts(coinsInserted) > price) {
         let change = calcChange(price);
         change = returnChange(change);
-        if(change > 0) {
-            errorMessage = 'Not able to return correct amount, money returned';
+        if (change > 0) {
+            errorMessage = 'Ikke nok veksel, pengene dine er returnert';
             returnCoins();
             return;
         }
     }
-    
+
     updateSaleVariables()
 
     for (let i = 0; i < coinsInserted.length; i++) {
@@ -29,7 +29,7 @@ function buyCoke() {
 }
 
 function returnCoins() {
-    if (valueFromCoinCounts(coinsInserted) === 0) return;
+    if (valueFromCoinCounts(coinsInserted) == 0) return;
 
     coinsReturned = [...coinsInserted];
     resetCoinsInserted();
@@ -40,29 +40,36 @@ function updateSaleVariables() {
     cokesInStore--
     isCokeInDelivery = true;
     errorMessage = '';
-    dagIsFeeling='happy';
+    if (customerCokes == 0) {
+        dagIsFeeling = 'happy';
+    }
     updateView()
 }
 
 function insertCoin(value) {
     let machineReady = isMachineReady();
-    
+
     if (machineReady)
-    for (let i = 0; i < coinsInserted.length; i++) {
-        if(coinValueFromIndex(i) === value) {
-            coinsInserted[i]++;
+        for (let i = 0; i < coinsInserted.length; i++) {
+            if (coinValueFromIndex(i) === value) {
+                coinsInserted[i]++;
+            }
         }
-    }
 
     updateView();
 }
 
 function isMachineReady() {
+    if (customerCokes == 4) {
+        errorMessage = 'Nå har du fått nok brus!';
+        updateView()
+        return;
+    }
     if (isCokeInDelivery) {
         errorMessage = 'Jeg tror du har glemt den andre colaen, ta den først.';
         updateView()
-        return false; 
-    } else if (cokesInStore === 0) {
+        return false;
+    } else if (cokesInStore == 0) {
         errorMessage = 'Beklager maskinen er tom for cola';
         returnCoins();
         updateView()
@@ -110,14 +117,36 @@ function takeCoins() {
     updateView();
 }
 
-function takeCola() {
+function takeCoke() {
     if (isCokeInDelivery)
-    dagIsFeeling='ecstatic'
+        customerCokeCount()
+    customerCokes++
     isCokeInDelivery = false;
-    errorMessage = '';
     updateView();
 }
 
 function resetCoinsInserted() {
     coinsInserted = [0, 0, 0, 0];
 }
+
+function customerCokeCount() {
+    if (customerCokes == 0) {
+        dagIsFeeling = 'ecstatic'
+    } else if (customerCokes == 1) {
+        dagIsFeeling = 'ecstatic2'
+    } else if (customerCokes == 2) {
+        dagIsFeeling = 'ecstatic3'
+    } else if (customerCokes == 3) {
+        dagIsFeeling = 'ecstatic4'
+    }
+    errorMessage='';
+    updateView()
+}
+
+function drinkCoke() {
+    customerCokes = 0;
+    dagIsFeeling = 'normal';
+    errorMessage= '';
+    updateView()
+}
+

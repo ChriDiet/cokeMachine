@@ -84,8 +84,8 @@ function getImgButtonsHtml() {
 }
 
 function getActionButtonsHtml() {
-    let buttonLabels = ['Angre','Ta myntene','Kjøpe Cola','Ta Cola'];
-    let onclickFunctions = ['returnCoins()','takeCoins()','buyCoke()','takeCola()'];
+    let buttonLabels = ['Angre','Ta myntene','Kjøpe Cola','Ta Cola','Drikk Cola'];
+    let onclickFunctions = ['returnCoins()','takeCoins()','buyCoke()','takeCoke()','drinkCoke()'];
     let actionButtonsHtml = '';
 
     for (let i = 0; i < buttonLabels.length; i++) {

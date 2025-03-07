@@ -130,7 +130,7 @@
     
     .buttons {
         display: grid;
-        grid-template-columns: 1.5fr 1fr;
+        grid-template-columns: 1.2fr 1fr;
     }
 
     .errorMsg {
@@ -153,6 +153,7 @@
         display: flex;
         justify-content: center;
         margin-top: -100px;
+        margin-right: 90px;
     }
 
     .utkast {
