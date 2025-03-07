@@ -55,7 +55,7 @@ function getAutomatHtml () {
 
 function getDagDrawingHtml() {
     return /*HTML*/`
-        <img src="../img/${dagIsFeeling}.svg"/>`;
+        <img src="img/${dagIsFeeling}.svg"/>`;
 }
 
 function getCoinsHtml(coinCounts) {
@@ -70,7 +70,7 @@ function getCoinsHtml(coinCounts) {
 }
 
 function repeatImgDivHtml(cssClass, image, count) {
-    return /*HTML*/`<div class="${cssClass}"><img src="../img/${image}.svg"/></div>`.repeat(count);
+    return /*HTML*/`<div class="${cssClass}"><img src="img/${image}.svg"/></div>`.repeat(count);
 }
 
 function getImgButtonsHtml() {
@@ -78,7 +78,7 @@ function getImgButtonsHtml() {
     let imgButtonsHtml = '';
 
     for (let i = 0; i < coinValues.length; i++) {
-        imgButtonsHtml += `<img src="../img/coin${coinValues[i]}.svg" onclick="insertCoin(${coinValues[i]})"/>`; 
+        imgButtonsHtml += `<img src="img/coin${coinValues[i]}.svg" onclick="insertCoin(${coinValues[i]})"/>`; 
     }
     return imgButtonsHtml;
 }
