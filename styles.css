@@ -1,48 +1,161 @@
-.coin > img {
-    height: 5rem;
-}
+* {
+    font-family: montserrat;
+    }
+    
+    #app {
+        display: flex;
+        justify-content: center;
+    }
+    .coin>img {
+        height: 3.4rem;
+        margin-left: 5px
+    }
+    
+    .coke>img {
+        height: 15rem;
+    }
+    
+    .coins {
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 4rem;
+    }
+    
+    .coin {
+        height: 1rem;
+    }
+    
+    .automat {
+        border: 5px solid rgb(44, 36, 29);
+        background-color: rgb(233, 228, 211);
+        border-radius: 25px;
+        width: 1200px;
+    }
+    
+    h1 {
+        text-align: center;
+    }
+    
+    .innmat {
+        display: grid;
+        grid-template-columns: 400px 400px 500px;
+        justify-items: center;
+    }
+    
+    .flexHorizontal {
+        display: flex;
+    }
+    
+    .flexVertical {
+        display: flex;
+        flex-direction: column;
 
-.coke > img {
-    height: 15rem;
-}
+    }
+    
+    .cokes {
+        display: flex;
+        padding-bottom: 1.5rem;
+        align-items: end;
+        margin-right: 25px;
+    }
+    
+    .coke {
+        width: 3rem;
+    }
 
-.coins {
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: 5.5rem;
-}
+    .actionButtons {
+        display: flex;
+        margin-top: 35px;
+        justify-content: center;
+        gap: 5px;
+    }
+    button {
+        height: 30px;
+        border-radius: 10px;
+        border: 1px solid black;
+        background-color: white;
+        font-size: 18px;
+        height: 40px;
+        padding-left: 8px;
+        padding-right: 10px;
+        justify-content: center;
+    } 
 
-.coin {
-    height: 0.5rem;
-    overflow: visible;
-}
+    button:hover {
+        background-color: #e73e4c;
+    }
+    
+    .putteInn img {
+        height: 3.5rem;
+        width: 3.5rem;
+        align-self: center;
+    }
+    
+    .kundeMynt{
+        text-align: center;
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 1.4rem;
+    }
+    
+    .kundeMynt img{
+        height: 45px;
+        width: 45px;
+        align-items: center;
+        align-content: flex-end;
+        justify-content: flex-end;
+    }
 
-.automat {
-    border: 5px solid gray;
-    padding-left: 1rem;
-    margin-right: 1rem;
-    background-color: lightblue;
-}
+    .utkast .coins .coin img{
+        height: 45px;
+        width: 45px;
+        align-items: center;
+        align-content: flex-end;
+        justify-content: flex-end;
+    }
+    
+    .putteInn {
+        display: flex;
+        padding: 10px;
+        gap: 5px;
+    }
+    
+    p {
+        margin-right: 11px;
+        font-size: 25px;
+        margin-left: 5px
+    }
+    
+    .buttons {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+    }
 
-.innmat{
-    display: flex;
-}
+    .errorMsg {
+        color: red;
+        font-size: 30px;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 20px;
+    }
 
-.flexHorizontal {
-    display: flex;
-}
+    .utkast .coke img {
+        height: 250px;
+    }
 
-.flexVertical{
-    display: flex;
-    flex-direction: column;
-}
+    .dag > img {
+        width: 200px;
+    }
 
-.cokes {
-    display: flex;
-    padding-right: 3rem;
-}
+    .dag {
+        display: flex;
+        justify-content: center;
+        margin-top: -100px;
+    }
 
-.coke {
-    width: 2rem;
-    overflow: visible;
-}
+    .utkast {
+        display: grid;
+        align-items: center;
+    }

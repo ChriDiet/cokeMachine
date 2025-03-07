@@ -66,3 +66,15 @@ function getCoinsHtml(coinCounts) {
 function repeatImgDivHtml(cssClass, image, count) {
     return /*HTML*/`<div class="${cssClass}"><img src="img/${image}.png"/></div>`.repeat(count);
 }
+
+function valueFromCoinCounts(coinCounts) {
+    return coinCounts[0]
+        + coinCounts[1] * 5
+        + coinCounts[2] * 10
+        + coinCounts[3] * 20;
+}
+
+function coinValueFromIndex(index){
+    const values = [1, 5, 10, 20];
+    return values[index];
+}

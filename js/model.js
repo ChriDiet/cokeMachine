@@ -1,7 +1,7 @@
 let coinsInMachine = [
-    20, // enkroninger
-    15, // femkroninger
-    10, // tikroninger
+    15, // enkroninger
+    10, // femkroninger
+    8, // tikroninger
     5, // tjuekroninger
 ];
 let coinsInserted = [
@@ -19,3 +19,4 @@ let coinsReturned = [
 let cokesInStore = 10;
 let isCokeInDelivery = false;
 let errorMessage = '';
+let dagIsFeeling = 'Normal';
