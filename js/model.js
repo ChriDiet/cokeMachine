@@ -19,5 +19,5 @@ let coinsReturned = [
 let cokesInStore = 10;
 let isCokeInDelivery = false;
 let errorMessage = '';
-let dagIsFeeling = 'Normal';
+let dagIsFeeling = 'normal';
 let customerCokes = 0;

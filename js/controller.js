@@ -10,8 +10,11 @@ function buyCoke() {
     }
 
     if (valueFromCoinCounts(coinsInserted) > price) {
-        let change = calcChange(price);
-        change = returnChange(change);
+        // let change = calcChange(price);
+        // change = returnChange(change);
+
+        let change = returnChange(calcChange(price));
+
         if (change > 0) {
             errorMessage = 'Ikke nok veksel, pengene dine er returnert';
             returnCoins();
@@ -130,23 +133,35 @@ function resetCoinsInserted() {
 }
 
 function customerCokeCount() {
-    if (customerCokes == 0) {
-        dagIsFeeling = 'ecstatic'
-    } else if (customerCokes == 1) {
-        dagIsFeeling = 'ecstatic2'
-    } else if (customerCokes == 2) {
-        dagIsFeeling = 'ecstatic3'
-    } else if (customerCokes == 3) {
-        dagIsFeeling = 'ecstatic4'
+    const feelings = ['ecstatic', 'ecstatic2', 'ecstatic3', 'ecstatic4'];
+
+    // forEach method;
+    // feelings.forEach((_, i) => {
+    //     if (customerCokes === i) return dagIsFeeling = feelings[i];
+    // });
+
+    // normal for loop;
+    for (let i = 0; feelings.length; i++) {
+        if (customerCokes === i) return dagIsFeeling = feelings[i];
     }
-    errorMessage='';
+
+    // if (customerCokes == 0) {
+    //     dagIsFeeling = 'ecstatic'
+    // } else if (customerCokes == 1) {
+    //     dagIsFeeling = 'ecstatic2'
+    // } else if (customerCokes == 2) {
+    //     dagIsFeeling = 'ecstatic3'
+    // } else if (customerCokes == 3) {
+    //     dagIsFeeling = 'ecstatic4'
+    // }
+    errorMessage = '';
     updateView()
 }
 
 function drinkCoke() {
     customerCokes = 0;
     dagIsFeeling = 'normal';
-    errorMessage= '';
+    errorMessage = '';
     updateView()
 }
 
